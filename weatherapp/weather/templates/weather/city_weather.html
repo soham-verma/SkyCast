@@ -1,0 +1,28 @@
+{% if weather_data %}
+    <div class="card mb-3">
+        <div class="card-body text-center">
+            <h1 class="card-title">{{ weather_data.city }}</h1>
+            <h2 class="card-subtitle mb-2 text-muted">{{ weather_data.temperature }}°C</h2>
+            <p class="card-text">{{ weather_data.description }}</p>
+            <img src="http://openweathermap.org/img/w/{{ weather_data.icon }}.png" class="card-img-top" alt="{{ weather_data.description }}" style="width: 100px;">
+        </div>
+    </div>
+{% endif %}
+
+{% if daily_forecasts %}
+    <h2 class="mt-4">5-Day Forecast</h2>
+    <div class="row">
+        {% for forecast in daily_forecasts %}
+            <div class="col-md">
+                <div class="card">
+                    <div class="card-body">
+                        <h3 class="card-title">{{ forecast.day }}</h3>
+                        <p class="card-text">{{ forecast.min_temp }}°C - {{ forecast.max_temp }}°C</p>
+                        <p class="card-text">{{ forecast.description }}</p>
+                        <img src="http://openweathermap.org/img/w/{{ forecast.icon }}.png" class="card-img-top" alt="{{ forecast.description }}" style="width: 50px;">
+                    </div>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+{% endif %}

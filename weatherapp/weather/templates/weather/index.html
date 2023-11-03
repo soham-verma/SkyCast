@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Weather App</title>
+    <link rel="stylesheet" href="{% static 'style.css' %}">
+    <!-- Include Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+
+  <div class="container mt-5">
+    <h1 class="text-center mb-4">Compare Weather</h1>
+    <form method="post" class="mb-3">
+        {% csrf_token %}
+        <div class="form-row justify-content-center">
+            <div class="col-auto">
+                <input type="text" class="form-control" name="city1" placeholder="Enter city 1">
+            </div>
+            <div class="col-auto">
+                <input type="text" class="form-control" name="city2" placeholder="Enter city 2">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary">Compare Weather</button>
+            </div>
+        </div>
+    </form>
+
+  <div class="container">
+    {% if weather_data1 %}
+      <div class="container">
+        {% include 'weather/city_weather.html' with weather_data=weather_data1 daily_forecasts=daily_forecasts1 %}
+      </div>
+    {% endif %}
+    <div class="mt-5">&nbsp;</div>
+    {% if weather_data2 %}
+      <div class="container">
+        {% include 'weather/city_weather.html' with weather_data=weather_data2 daily_forecasts=daily_forecasts2 %}
+      </div>
+    {% endif %}
+  </div>
+</div>
+
+</body>
+</html>
